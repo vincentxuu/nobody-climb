@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { userReducer } from './userSlice';
 import { loadingReducer } from './loadingSlice';
+import { searchReducer } from './searchSlice';
 import storage from 'redux-persist/lib/storage';
 import {
 	persistStore,
@@ -18,12 +19,13 @@ const persistConfig = {
 	storage,
 };
 
-const persistedReducer = persistReducer(persistConfig, userReducer,);
+const persistedReducer = persistReducer(persistConfig, userReducer);
 
 export const store = configureStore({
 	reducer: {
 		user: persistedReducer,
 		loading: loadingReducer,
+		search: searchReducer,
 	},
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware({

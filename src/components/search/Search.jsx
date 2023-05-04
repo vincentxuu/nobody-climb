@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styled from '@emotion/styled';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
-import InputBase from '@mui/material/InputBase';
 import { ReactComponent as SearchIcon } from '../../assets/icon/icon_search.svg';
+import { Input, InputBase, TextField } from '@mui/material';
+import { onSearch, selectSearch } from '../../redux/searchSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 const SearchWrapper = styled.div``;
 
@@ -15,6 +17,13 @@ const StylePaper = styled(Paper)`
 `;
 
 const Search = () => {
+	const inputRef = useRef();
+	const dispatch = useDispatch();
+	const onSubmit = (e) => {
+		e.preventDefault();
+		const values = inputRef.current.value;
+		dispatch(onSearch(values));
+	};
 	return (
 		<SearchWrapper>
 			<StylePaper
@@ -28,13 +37,14 @@ const Search = () => {
 					boxShadow: 'none',
 				}}
 			>
-				<IconButton type='button' sx={{ p: '10px' }} aria-label='search'>
+				<IconButton onClick={onSubmit} type='button' sx={{ p: '10px' }} aria-label='search'>
 					<SearchIcon />
 				</IconButton>
 				<InputBase
 					sx={{ ml: 1, flex: 1 }}
 					placeholder='請輸入關鍵字'
-					inputProps={{ 'aria-label': 'search google maps' }}
+					inputRef={inputRef}
+					onChange={() => onSubmit}
 				/>
 			</StylePaper>
 		</SearchWrapper>

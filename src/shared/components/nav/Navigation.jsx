@@ -131,24 +131,6 @@ const Navigation = () => {
 							<LogoIcon />
 						</Logo>
 					</Link>
-					<Search>
-						<Paper
-							elevation={2}
-							component='form'
-							sx={{
-								p: '2px 4px',
-								display: 'flex',
-								alignItems: 'center',
-								maxWidth: 400,
-								boxShadow: 'none',
-							}}
-						>
-							<IconButton type='button' sx={{ p: '10px' }} aria-label='search'>
-								<SearchIcon />
-							</IconButton>
-							<InputBase sx={{ ml: 2, flex: 1 }} />
-						</Paper>
-					</Search>
 				</NavigationLeft>
 				<NavigationRight>
 					<StyleList>

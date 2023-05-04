@@ -4,6 +4,8 @@ import { Waypoint } from 'react-waypoint';
 import Topics from './Topics';
 import firebase from '../../utilis/firebase';
 import { Box, Card, CardContent, CardMedia, Grid, ListItem, Typography } from '@mui/material';
+import { useSelector } from 'react-redux';
+import { selectSearch } from '../../redux/searchSlice';
 
 function Posts() {
 	const [posts, setPosts] = useState([]);
@@ -45,11 +47,17 @@ function Posts() {
 				});
 		}
 	}, [currentTopic]);
+
+	const search = useSelector(selectSearch);
+	const keys = ['title', 'topic', 'content'];
+	const filteredPost = posts.filter((item) =>
+		keys.some((key) => item[key].toLowerCase().includes(search.search.toLowerCase())),
+	);
 	return (
 		<Box>
 			<Box sx={{ flexGrow: 1 }}>
 				<Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, md: 12 }}>
-					{posts.map((post) => {
+					{filteredPost.map((post) => {
 						return (
 							<Grid item xs={4} md={6} key={post.title}>
 								<Card sx={{ m: 2 }}>

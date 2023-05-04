@@ -4,11 +4,18 @@ import { Link } from 'react-router-dom';
 import BiographyList from '../../constants/BiographyList.json';
 import PersonLeft from '../../assets/photo/personleft.jpeg';
 import { ReactComponent as ArrowRightCircle } from '../../assets/icon/arrow-right-circled.svg';
+import { useSelector } from 'react-redux';
+import { selectSearch } from '../../redux/searchSlice';
 
 const BioCard = () => {
+	const search = useSelector(selectSearch);
+	const keys = ['name', 'time', 'start', 'showUp', 'type', 'reason', 'why', 'list', 'word'];
+	const filteredList = BiographyList.filter((item) =>
+		keys.some((key) => item[key].toLowerCase().includes(search.search.toLowerCase())),
+	);
 	return (
 		<Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-			{BiographyList.map((item) => (
+			{filteredList.map((item) => (
 				<Grid item xs={4} sm={4} md={4} key={item.name}>
 					<Link to='/biography/content' style={{ textDecoration: 'none' }}>
 						<Card sx={{ m: 2 }}>
