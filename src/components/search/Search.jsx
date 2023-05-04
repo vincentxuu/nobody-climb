@@ -20,15 +20,17 @@ const Search = () => {
 	const inputRef = useRef();
 	const dispatch = useDispatch();
 	const onSubmit = (e) => {
-		e.preventDefault();
 		const values = inputRef.current.value;
 		dispatch(onSearch(values));
+	};
+
+	const handleSearch = (e) => {
+		e.key === 'Enter' && onSubmit();
 	};
 	return (
 		<SearchWrapper>
 			<StylePaper
 				elevation={2}
-				component='form'
 				sx={{
 					p: '2px 4px',
 					display: 'flex',
@@ -45,6 +47,7 @@ const Search = () => {
 					placeholder='請輸入關鍵字'
 					inputRef={inputRef}
 					onChange={() => onSubmit}
+					onKeyDown={handleSearch}
 				/>
 			</StylePaper>
 		</SearchWrapper>
