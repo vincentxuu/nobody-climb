@@ -61,14 +61,18 @@ function Posts() {
 							<Grid item xs={4} md={6} key={post.title}>
 								<Card sx={{ m: 2 }}>
 									<CardMedia sx={{ height: 248 }} image={post.imageURL} title='green iguana' />
-									<CardContent sx={{ width: 360, height: 160, pdding: '5px' }}>
+									<CardContent
+										sx={{
+											width: 360,
+											height: 160,
+											' @media (max-width: 767px)': {
+												width: 300,
+												height: 180,
+											},
+										}}
+									>
 										<Box>
-											<Typography
-												gutterBottom
-												variant='h2'
-												component='div'
-												sx={{ fontSize: '26px' }}
-											>
+											<Typography gutterBottom variant='h2' sx={{ fontSize: '26px' }}>
 												{post.title}
 											</Typography>
 											<Typography variant='subtitle1' color='#8E8C8C'>

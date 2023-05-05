@@ -116,6 +116,15 @@ const ImageSlider = () => {
 		}
 	}, [currentTopic]);
 
+	useEffect(() => {
+		const interval = setInterval(() => {
+			const isLastSlide = currentIndex === posts.length - 1;
+			const newIndex = isLastSlide ? 0 : currentIndex + 1;
+			setCurrentIndex(newIndex);
+		}, 5000);
+		return () => clearInterval(interval);
+	}, [currentIndex]);
+
 	const goToPrevious = () => {
 		const isFirstSlide = currentIndex === 0;
 		const newIndex = isFirstSlide ? posts.length - 1 : currentIndex - 1;
@@ -157,9 +166,20 @@ const ImageSlider = () => {
 								width: '360px',
 								height: '100%',
 								borderRadius: '10px 0 0 10px',
+								' @media (max-width: 767px)': {
+									width: '200px',
+								},
 							}}
 						>
-							<Stack direction='row' m='40px 0 0 40px'>
+							<Stack
+								direction='row'
+								sx={{
+									m: '40px 0 0 40px',
+									' @media (max-width: 767px)': {
+										m: '10px 0 0 10px',
+									},
+								}}
+							>
 								<Chip
 									label={`${posts[currentIndex].topic}`}
 									sx={{
@@ -181,7 +201,6 @@ const ImageSlider = () => {
 									sx={{
 										fontSize: '12px',
 										color: 'white',
-										backgroundColor: 'rgba(0, 0, 0, 0.5);',
 										lineHeight: '150%',
 										fontWeight: 500,
 										width: '50px',
@@ -200,8 +219,7 @@ const ImageSlider = () => {
 								component='div'
 								sx={{
 									fontSize: '26px',
-									color: 'white !important',
-									backgroundColor: 'rgba(0, 0, 0, 0.5)',
+									color: 'white ',
 									lineHeight: '150%',
 									fontWeight: 500,
 									width: '280px',
@@ -211,8 +229,9 @@ const ImageSlider = () => {
 									ml: '40px',
 									' @media (max-width: 767px)': {
 										fontSize: '20px',
-										width: '200px',
+										width: '150px',
 										height: '60px',
+										ml: '15px',
 									},
 								}}
 							>

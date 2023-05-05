@@ -17,11 +17,11 @@ const BlogWapper = styled.div`
 	background: #f5f5f5;
 `;
 
-const containerStyles = {
-	maxWidth: '1120px',
-	height: '460px',
-	margin: '64px auto 0 auto',
-};
+const StyleImageSlider = styled.div`
+	max-width: 1120px;
+	height: 460px;
+	margin: 64px auto 15px auto;
+`;
 
 function Blog() {
 	return (
@@ -33,9 +33,9 @@ function Blog() {
 		>
 			<BlogWapper>
 				<Navigation />
-				<Box sx={containerStyles}>
+				<StyleImageSlider>
 					<ImageSlider />
-				</Box>
+				</StyleImageSlider>
 				<Box
 					sx={{
 						display: 'flex',
@@ -43,7 +43,7 @@ function Blog() {
 						justifyContent: 'center',
 						padding: '3% 15%',
 						' @media (max-width: 767px)': {
-							padding: '3% 10%',
+							padding: '3% 3%',
 						},
 					}}
 				>
