@@ -134,6 +134,8 @@ const ImageSlider = () => {
 	const slideStylesWidthBackground = {
 		...slideStyles,
 		backgroundImage: postList && `url(${posts[currentIndex].imageURL})`,
+		// backgroundImage:
+		// 	'linear-gradient(to bottom, black), postList && `url(${posts[currentIndex].imageURL})`',
 	};
 
 	return (
@@ -149,8 +151,15 @@ const ImageSlider = () => {
 				</div>
 				<div style={slideStylesWidthBackground}>
 					{postList && (
-						<Stack ml='24px'>
-							<Stack direction='row' spacing={2}>
+						<Stack
+							sx={{
+								backgroundColor: 'black',
+								width: '360px',
+								height: '100%',
+								borderRadius: '10px 0 0 10px',
+							}}
+						>
+							<Stack direction='row' m='40px 0 0 40px'>
 								<Chip
 									label={`${posts[currentIndex].topic}`}
 									sx={{
@@ -159,8 +168,8 @@ const ImageSlider = () => {
 										lineHeight: '150%',
 										width: '57px',
 										height: '21px',
-										color: 'white',
-										backgroundColor: 'black',
+										color: 'black',
+										backgroundColor: 'white',
 										borderRadius: '2px',
 										m: 2,
 									}}
@@ -195,11 +204,11 @@ const ImageSlider = () => {
 									backgroundColor: 'rgba(0, 0, 0, 0.5)',
 									lineHeight: '150%',
 									fontWeight: 500,
-									width: '300px',
+									width: '280px',
 									height: '70px',
 									borderRadius: '8px',
 									p: 1,
-									ml: 2,
+									ml: '40px',
 									' @media (max-width: 767px)': {
 										fontSize: '20px',
 										width: '200px',
