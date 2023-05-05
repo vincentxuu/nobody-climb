@@ -1,3 +1,4 @@
+import styled from '@emotion/styled';
 import { Chip, CircularProgress, Stack, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useEffect, useRef } from 'react';
@@ -46,10 +47,33 @@ const dotsContainerStyles = {
 };
 
 const dotStyle = {
-	margin: '0 3px',
+	margin: '10px 3px',
 	cursor: 'pointer',
 	fontSize: '20px',
 };
+
+const dot = {
+	cursor: 'pointer',
+	height: '1rem',
+	width: '1rem',
+	margin: '0px 3px',
+	borderRadius: '50%',
+	display: 'inline-block',
+};
+
+const Dot = styled.div`
+	cursor: pointer;
+	height: 1rem;
+	width: 1rem;
+	margin: 0px 3px;
+	background-color: ${(props) =>
+		props.position ? 'rgba(75, 70, 70, 0.918)' : 'rgba(0, 0, 0, 0.149)'};
+	border-radius: 50%;
+	display: inline-block;
+	&:hover {
+		background-color: rgba(75, 70, 70, 0.918);
+	}
+`;
 
 const ImageSlider = () => {
 	const [posts, setPosts] = useState([]);
@@ -57,6 +81,8 @@ const ImageSlider = () => {
 	const urlSearchParams = new URLSearchParams(location.search);
 	const currentTopic = urlSearchParams.get('topic');
 	const lastPodtSnapshotRef = useRef();
+	const [currentIndex, setCurrentIndex] = useState(0);
+
 	useEffect(() => {
 		if (currentTopic) {
 			firebase
@@ -90,7 +116,6 @@ const ImageSlider = () => {
 		}
 	}, [currentTopic]);
 
-	const [currentIndex, setCurrentIndex] = useState(0);
 	const goToPrevious = () => {
 		const isFirstSlide = currentIndex === 0;
 		const newIndex = isFirstSlide ? posts.length - 1 : currentIndex - 1;
@@ -146,8 +171,8 @@ const ImageSlider = () => {
 									component='div'
 									sx={{
 										fontSize: '12px',
-										color: 'black',
-										backgroundColor: '#EBEAEA;opacity:0.8;',
+										color: 'white',
+										backgroundColor: 'rgba(0, 0, 0, 0.5);',
 										lineHeight: '150%',
 										fontWeight: 500,
 										width: '50px',
@@ -166,8 +191,8 @@ const ImageSlider = () => {
 								component='div'
 								sx={{
 									fontSize: '26px',
-									color: 'black',
-									backgroundColor: '#EBEAEA;opacity:0.8;',
+									color: 'white !important',
+									backgroundColor: 'rgba(0, 0, 0, 0.5)',
 									lineHeight: '150%',
 									fontWeight: 500,
 									width: '300px',
@@ -201,7 +226,7 @@ const ImageSlider = () => {
 				<div style={dotsContainerStyles}>
 					{posts.map((slide, slideIndex) => (
 						<div style={dotStyle} key={slideIndex} onClick={() => goToSlide(slideIndex)}>
-							●
+							<Dot key={slideIndex} position={slideIndex === currentIndex}></Dot>
 						</div>
 					))}
 				</div>
