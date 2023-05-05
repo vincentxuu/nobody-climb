@@ -47,7 +47,6 @@ function Posts() {
 				});
 		}
 	}, [currentTopic]);
-
 	const search = useSelector(selectSearch);
 	const keys = ['title', 'topic', 'content'];
 	const filteredPost = posts.filter((item) =>
